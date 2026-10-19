@@ -41,8 +41,11 @@
 
   /* ---------- ADMIN ---------- */
   var MENU = [
-    ["dashboard", "speedometer2", "Dashboard"], ["responses", "table", "Respons"],
-    ["kontak", "envelope", "Pesan Masuk"], ["galeri", "images", "Galeri"],
+    ["dashboard", "speedometer2", "Dashboard"], 
+    ["pendaftar", "people", "Data Pendaftar"], // <-- TAMBAHKAN BARIS INI
+    ["responses", "table", "Respons"],
+    ["kontak", "envelope", "Pesan Masuk"], 
+    ["galeri", "images", "Galeri"],
     ["panduan", "folder2-open", "Kelola Artikel"]
   ];
 
@@ -55,8 +58,7 @@
     MENU.forEach(function (m) {
       html += '<a class="nav-link' + (m[0] === active ? " active" : "") + '" href="' + m[0] + '.html"><i class="bi bi-' + m[1] + ' me-2"></i>' + m[2] + "</a>";
     });
-    html += '<a class="nav-link" href="../index.html" target="_blank"><i class="bi bi-box-arrow-up-right me-2"></i>Lihat Situs</a>' +
-            '<a class="nav-link text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-left me-2"></i>Keluar</a></nav>';
+    html += '<a class="nav-link text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-left me-2"></i>Keluar</a></nav>';
     document.getElementById("sidebar").innerHTML = html;
     document.getElementById("btnLogout").addEventListener("click", async function (e) {
       e.preventDefault(); await sb.auth.signOut(); location.replace("../login.html");
