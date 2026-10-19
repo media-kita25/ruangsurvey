@@ -248,7 +248,7 @@
 
 <main class="page-shell">
 
-    <!-- HEADER SURVEY - Tanpa Cover -->
+    <!-- HEADER SURVEY -->
     <div class="survey-header">
         <h1><i class="bi bi-clipboard-check me-2" style="color: #087f79;"></i>Form Survey Penggunaan Media Sosial</h1>
         <p>Isilah data sesuai dengan kebiasaan Anda sehari-hari. Kolom yang bertanda bintang (*) wajib diisi.</p>
@@ -256,28 +256,77 @@
 
     <!-- MAIN CONTENT -->
     <div class="survey-content">
+        
+        <!-- PESAN NOTIFIKASI -->
         <div id="pesan"></div>
-        <form id="formSurvey" class="data-panel">
 
-            <!-- SECTION A - Data Responden -->
+        <!-- ========================================== -->
+        <!-- FORM 1: PENDAFTARAN (Hanya muncul jika belum daftar) -->
+        <!-- ========================================== -->
+        <form id="formPendaftaran" class="data-panel d-none">
+            <section class="mb-4">
+                <h2 class="form-section-title">Pendaftaran Responden</h2>
+                <p class="text-muted mb-4">Anda harus melengkapi data diri di bawah ini sebelum mengisi survey.</p>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label required" for="reg_nama">Nama Lengkap</label>
+                        <input class="form-control" id="reg_nama" type="text" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label required" for="reg_umur">Umur</label>
+                        <input class="form-control" id="reg_umur" type="number" min="10" max="100" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label required" for="reg_jk">Jenis Kelamin</label>
+                        <select class="form-select" id="reg_jk" required>
+                            <option value="">-- Pilih --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label required" for="reg_email">Email</label>
+                        <input class="form-control" id="reg_email" type="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label required" for="reg_telp">Nomor Telepon / WhatsApp</label>
+                        <input class="form-control" id="reg_telp" type="text" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label required" for="reg_alamat">Alamat Lengkap</label>
+                        <textarea class="form-control" id="reg_alamat" rows="2" required></textarea>
+                    </div>
+                </div>
+            </section>
+            <div class="d-flex justify-content-end gap-2">
+                <button class="btn btn-primary" type="submit" id="btnDaftar"><i class="bi bi-person-plus me-2"></i>Daftar & Lanjutkan Survey</button>
+            </div>
+        </form>
+
+        <!-- ========================================== -->
+        <!-- FORM 2: SURVEY UTAMA (Hanya muncul jika SUDAH daftar) -->
+        <!-- ========================================== -->
+        <form id="formSurvey" class="data-panel d-none">
+            
+            <div class="alert alert-success mb-4">
+                <i class="bi bi-person-check-fill me-2"></i> Halo, <strong id="namaPendaftarTampil">Responden</strong>! Silakan lanjutkan mengisi survey di bawah ini.
+            </div>
+
+            <!-- SECTION A - Data Responden (Diisi otomatis dari pendaftaran) -->
             <section class="mb-4">
                 <h2 class="form-section-title">Section A - Data Responden</h2>
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label" for="nama">Nama</label>
-                        <input class="form-control" id="nama" name="nama" placeholder="Opsional">
+                        <input class="form-control bg-light" id="nama" name="nama" readonly>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label required" for="umur">Umur</label>
-                        <input class="form-control" id="umur" name="umur" type="number" min="10" max="100" required>
+                        <input class="form-control bg-light" id="umur" name="umur" type="number" readonly>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label required" for="jenis_kelamin">Jenis Kelamin</label>
-                        <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
-                            <option value="">-- Pilih --</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
+                        <input class="form-control bg-light" id="jenis_kelamin" name="jenis_kelamin" readonly>
                     </div>
                     <div class="col-12">
                         <label class="form-label required" for="pekerjaan">Pekerjaan</label>
@@ -403,10 +452,12 @@
             <!-- BUTTON -->
             <div class="d-flex justify-content-end gap-2">
                 <button class="btn btn-light" type="reset">Reset</button>
-                <button class="btn btn-primary" type="submit"><i class="bi bi-send me-2"></i>Submit Survey</button>
+                <button class="btn btn-primary" type="submit" id="btnSubmitSurvey"><i class="bi bi-send me-2"></i>Submit Survey</button>
             </div>
 
         </form>
+
+        <!-- SUKSES -->
         <div id="sukses" class="data-panel text-center p-5 d-none">
             <div class="mb-3" style="font-size:60px"><i class="bi bi-check-circle-fill text-success"></i></div>
             <h2 class="fw-bold">Survey Berhasil!</h2>
@@ -427,10 +478,162 @@
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- CDN Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+
+<!-- File Config Anda -->
 <script src="assets/js/config.js"></script>
-<script src="assets/js/common.js"></script>
-<script src="assets/js/app.js"></script>
+
+<!-- Logika Utama Survey -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // 1. Inisialisasi Supabase dari config.js
+    const supabaseClient = supabase.createClient(
+        window.RS_CONFIG.SUPABASE_URL, 
+        window.RS_CONFIG.SUPABASE_ANON_KEY
+    );
+
+    const formPendaftaran = document.getElementById('formPendaftaran');
+    const formSurvey = document.getElementById('formSurvey');
+    const suksesDiv = document.getElementById('sukses');
+    const pesanDiv = document.getElementById('pesan');
+    const btnDaftar = document.getElementById('btnDaftar');
+    const btnSubmitSurvey = document.getElementById('btnSubmitSurvey');
+
+    // Cek status login (sessionStorage)
+    const idPendaftar = sessionStorage.getItem('pendaftar_id');
+    const namaPendaftar = sessionStorage.getItem('nama_pendaftar');
+
+    // ==========================================
+    // LOGIKA TAMPILAN AWAL
+    // ==========================================
+    if (!idPendaftar) {
+        // Jika BELUM daftar, tampilkan form pendaftaran
+        formPendaftaran.classList.remove('d-none');
+        formSurvey.classList.add('d-none');
+    } else {
+        // Jika SUDAH daftar, tampilkan form survey
+        formPendaftaran.classList.add('d-none');
+        formSurvey.classList.remove('d-none');
+        
+        // Isi otomatis data responden yang readonly
+        document.getElementById('namaPendaftarTampil').innerText = namaPendaftar;
+        document.getElementById('nama').value = namaPendaftar;
+        document.getElementById('umur').value = sessionStorage.getItem('umur_pendaftar') || '';
+        document.getElementById('jenis_kelamin').value = sessionStorage.getItem('jk_pendaftar') || '';
+    }
+
+    // ==========================================
+    // LOGIKA SUBMIT FORM PENDAFTARAN
+    // ==========================================
+    formPendaftaran.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        btnDaftar.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Menyimpan...';
+        btnDaftar.disabled = true;
+        pesanDiv.innerHTML = ''; // Reset pesan
+
+        const dataPendaftar = {
+            nama: document.getElementById('reg_nama').value,
+            umur: parseInt(document.getElementById('reg_umur').value),
+            jenis_kelamin: document.getElementById('reg_jk').value,
+            email: document.getElementById('reg_email').value,
+            no_telepon: document.getElementById('reg_telp').value,
+            alamat: document.getElementById('reg_alamat').value
+        };
+
+        try {
+            // Simpan ke Supabase tabel 'pendaftar_survey'
+            const { data, error } = await supabaseClient
+                .from('pendaftar_survey')
+                .insert([dataPendaftar])
+                .select();
+
+            if (error) throw error;
+
+            // Simpan ke session browser
+            if (data && data.length > 0) {
+                sessionStorage.setItem('pendaftar_id', data[0].id);
+                sessionStorage.setItem('nama_pendaftar', data[0].nama);
+                sessionStorage.setItem('umur_pendaftar', data[0].umur);
+                sessionStorage.setItem('jk_pendaftar', data[0].jenis_kelamin);
+            }
+
+            // Tampilkan form survey
+            formPendaftaran.classList.add('d-none');
+            formSurvey.classList.remove('d-none');
+            
+            document.getElementById('namaPendaftarTampil').innerText = dataPendaftar.nama;
+            document.getElementById('nama').value = dataPendaftar.nama;
+            document.getElementById('umur').value = dataPendaftar.umur;
+            document.getElementById('jenis_kelamin').value = dataPendaftar.jenis_kelamin;
+
+            // Scroll ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        } catch (error) {
+            pesanDiv.innerHTML = `<div class="alert alert-danger">Gagal mendaftar: ${error.message}</div>`;
+        } finally {
+            btnDaftar.innerHTML = '<i class="bi bi-person-plus me-2"></i>Daftar & Lanjutkan Survey';
+            btnDaftar.disabled = false;
+        }
+    });
+
+    // ==========================================
+    // LOGIKA SUBMIT FORM SURVEY UTAMA
+    // ==========================================
+    formSurvey.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        btnSubmitSurvey.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Mengirim...';
+        btnSubmitSurvey.disabled = true;
+        pesanDiv.innerHTML = ''; // Reset pesan
+
+        // Kumpulkan semua data survey
+        const dataSurvey = {
+            pendaftar_id: sessionStorage.getItem('pendaftar_id'),
+            nama: document.getElementById('nama').value,
+            umur: parseInt(document.getElementById('umur').value),
+            jenis_kelamin: document.getElementById('jenis_kelamin').value,
+            pekerjaan: document.getElementById('pekerjaan').value,
+            platform_utama: document.getElementById('platform_utama').value,
+            durasi_harian: document.getElementById('durasi_harian').value,
+            tujuan_utama: document.getElementById('tujuan_utama').value,
+            frekuensi: document.getElementById('frekuensi').value,
+            bantu_informasi: document.getElementById('bantu_informasi').value,
+            ganggu_produktivitas: document.getElementById('ganggu_produktivitas').value,
+            pengaruh_kehidupan: document.getElementById('pengaruh_kehidupan').value,
+            saran: document.getElementById('saran').value
+        };
+
+        try {
+            // Simpan ke Supabase tabel 'survey_jawaban'
+            const { error } = await supabaseClient
+                .from('survey_jawaban')
+                .insert([dataSurvey]);
+
+            if (error) throw error;
+
+            // Tampilkan sukses
+            formSurvey.classList.add('d-none');
+            suksesDiv.classList.remove('d-none');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        } catch (error) {
+            pesanDiv.innerHTML = `<div class="alert alert-danger">Gagal menyimpan survey: ${error.message}</div>`;
+            btnSubmitSurvey.innerHTML = '<i class="bi bi-send me-2"></i>Submit Survey';
+            btnSubmitSurvey.disabled = false;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+
+    // Tombol Isi Survey Lagi (reset session dan reload)
+    document.getElementById('isiLagi').addEventListener('click', function() {
+        sessionStorage.clear();
+        location.reload();
+    });
+});
+</script>
 </body>
 </html>
