@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // ==========================================
-    // LOGIKA SUBMIT FORM SURVEY UTAMA
+    // LOGIKA SUBMIT FORM SURVEY UTAMA (DIPERBAIKI)
     // ==========================================
     formSurvey.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -590,42 +590,35 @@ document.addEventListener("DOMContentLoaded", function() {
         btnSubmitSurvey.disabled = true;
         pesanDiv.innerHTML = ''; // Reset pesan
 
-        // Kumpulkan semua data survey
-        const dataSurvey = {
-            pendaftar_id: sessionStorage.getItem('pendaftar_id'),
-            nama: document.getElementById('nama').value,
-            umur: parseInt(document.getElementById('umur').value),
-            jenis_kelamin: document.getElementById('jenis_kelamin').value,
-            pekerjaan: document.getElementById('pekerjaan').value,
-            platform_utama: document.getElementById('platform_utama').value,
-            durasi_harian: document.getElementById('durasi_harian').value,
-            tujuan_utama: document.getElementById('tujuan_utama').value,
-            frekuensi: document.getElementById('frekuensi').value,
-            bantu_informasi: document.getElementById('bantu_informasi').value,
-            ganggu_produktivitas: document.getElementById('ganggu_produktivitas').value,
-            pengaruh_kehidupan: document.getElementById('pengaruh_kehidupan').value,
-            saran: document.getElementById('saran').value
-        };
+        // Memanggil fungsi RPC 'submit_survey' yang ada di schema.sql
+        // Fungsi ini yang akan menyimpan data ke tabel 'responden' sekaligus 'survey_jawaban'
+        const { error } = await supabaseClient.rpc('submit_survey', {
+            p_nama: document.getElementById('nama').value,
+            p_umur: parseInt(document.getElementById('umur').value),
+            p_jk: document.getElementById('jenis_kelamin').value,
+            p_pekerjaan: document.getElementById('pekerjaan').value,
+            p_platform: document.getElementById('platform_utama').value,
+            p_durasi: document.getElementById('durasi_harian').value,
+            p_tujuan: document.getElementById('tujuan_utama').value,
+            p_frekuensi: document.getElementById('frekuensi').value,
+            p_bantu: document.getElementById('bantu_informasi').value,
+            p_ganggu: document.getElementById('ganggu_produktivitas').value,
+            p_pengaruh: document.getElementById('pengaruh_kehidupan').value,
+            p_saran: document.getElementById('saran').value
+        });
 
-        try {
-            // Simpan ke Supabase tabel 'survey_jawaban'
-            const { error } = await supabaseClient
-                .from('survey_jawaban')
-                .insert([dataSurvey]);
-
-            if (error) throw error;
-
-            // Tampilkan sukses
-            formSurvey.classList.add('d-none');
-            suksesDiv.classList.remove('d-none');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        } catch (error) {
+        if (error) {
             pesanDiv.innerHTML = `<div class="alert alert-danger">Gagal menyimpan survey: ${error.message}</div>`;
             btnSubmitSurvey.innerHTML = '<i class="bi bi-send me-2"></i>Submit Survey';
             btnSubmitSurvey.disabled = false;
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
         }
+
+        // Tampilkan sukses
+        formSurvey.classList.add('d-none');
+        suksesDiv.classList.remove('d-none');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Tombol Isi Survey Lagi (reset session dan reload)
