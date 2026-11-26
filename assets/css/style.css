@@ -310,14 +310,14 @@ body.admin-hidden { visibility: hidden; }
   --g-ink:#0f2a2a; --g-muted:#506466; --g-brand:#0f766e; --g-brand2:#14b8a6;
   --g-glass:rgba(255,255,255,.58); --g-glass-strong:rgba(255,255,255,.78);
   --g-border:rgba(255,255,255,.75); --g-line:rgba(15,118,110,.14);
-  --g-shadow:0 10px 40px rgba(15,60,60,.12); --g-blur:blur(18px) saturate(170%);
+  --g-shadow:0 6px 22px rgba(15,60,60,.10); --g-blur:blur(10px);
 }
 html{scroll-behavior:smooth}
 body,body.pub,body.admin-layout{
   font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif !important; color:var(--g-ink) !important;
-  background:linear-gradient(135deg,#d6f2ec 0%,#e6effb 48%,#e2f6e8 100%) fixed !important;
+  background:linear-gradient(135deg,#d6f2ec 0%,#e6effb 48%,#e2f6e8 100%) !important;
 }
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;transform:translateZ(0);will-change:transform;
   background:
    radial-gradient(42vmax 42vmax at 6% 8%,rgba(20,184,166,.38),transparent 60%),
    radial-gradient(36vmax 36vmax at 94% 16%,rgba(59,130,246,.24),transparent 60%),
@@ -328,13 +328,16 @@ h1,h2,h3,.navbar-brand,.stat-number,.stat-value{font-family:"Plus Jakarta Sans",
 .data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.panduan-card,.card,.sidebar-section,
 .survey-header,.about-header,.vm-header,.pub-header,.auth-box,.modal-content,footer{
   background:var(--g-glass) !important; border:1px solid var(--g-border) !important;
-  box-shadow:var(--g-shadow) !important; -webkit-backdrop-filter:var(--g-blur); backdrop-filter:var(--g-blur);
+  box-shadow:var(--g-shadow) !important;
 }
 .data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.panduan-card,.card{border-radius:20px !important}
-.card:hover,.feature-tile:hover,.product-card:hover,.stat-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(15,60,60,.18) !important}
+.card:hover,.feature-tile:hover,.product-card:hover,.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,60,60,.16) !important}
 .card,.feature-tile,.product-card,.stat-card,.btn,.nav-link{transition:transform .25s ease,box-shadow .25s ease,background .25s ease !important}
 .card.bg-transparent,.card-footer,.card-header{background:transparent !important}
 .card-footer{border-top:1px solid var(--g-line) !important}
+
+.data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.panduan-card,.card,.sidebar-section,footer{background:rgba(255,255,255,.74) !important}
+.survey-header,.about-header,.vm-header,.pub-header,.auth-box,.modal-content{-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur)}
 
 /* Kerangka halaman */
 .page-shell,.company-wrapper,.company-body,.company-content,.content-section,.section-band,.section-muted,.bg-white:not(.navbar):not(footer){
@@ -362,12 +365,12 @@ h1,h2,h3,.navbar-brand,.stat-number,.stat-value{font-family:"Plus Jakarta Sans",
 .galeri-overlay{background:linear-gradient(transparent,rgba(8,40,40,.78)) !important}
 .feature-icon,.product-icon{background:linear-gradient(135deg,rgba(20,184,166,.22),rgba(101,163,13,.2)) !important;color:var(--g-brand) !important;border:1px solid var(--g-border);border-radius:14px !important}
 
-/* Navbar kaca melayang */
-.navbar{background:rgba(255,255,255,.62) !important;-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+/* Navbar kaca melayang (selektor diperkuat agar menang atas gaya inline tiap halaman) */
+body .navbar.fixed-top{background:rgba(255,255,255,.62) !important;-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
   border-bottom:1px solid var(--g-border) !important;box-shadow:0 8px 30px rgba(15,60,60,.08) !important}
-.navbar-nav .nav-link{border-radius:999px !important;color:#2b4647 !important}
-.navbar-nav .nav-link:hover{background:rgba(20,184,166,.14) !important;color:var(--g-brand) !important}
-.navbar-nav .nav-link.active{background:linear-gradient(135deg,var(--g-brand),var(--g-brand2)) !important;color:#fff !important;box-shadow:0 6px 16px rgba(15,118,110,.3)}
+body .navbar .navbar-nav .nav-link{border-radius:999px !important;color:#2b4647 !important;background:transparent}
+body .navbar .navbar-nav .nav-link:hover{background:rgba(20,184,166,.14) !important;color:var(--g-brand) !important}
+body .navbar .navbar-nav .nav-link.active{background:linear-gradient(135deg,var(--g-brand),var(--g-brand2)) !important;color:#fff !important;box-shadow:0 6px 16px rgba(15,118,110,.3)}
 
 /* Tombol & form */
 .btn{border-radius:12px !important;font-weight:600}
@@ -379,7 +382,7 @@ h1,h2,h3,.navbar-brand,.stat-number,.stat-value{font-family:"Plus Jakarta Sans",
 .form-control,.form-select{background:rgba(255,255,255,.72) !important;border:1px solid var(--g-line) !important;border-radius:12px !important;color:var(--g-ink)}
 .form-control:focus,.form-select:focus{border-color:var(--g-brand2) !important;box-shadow:0 0 0 4px rgba(20,184,166,.18) !important;background:#fff !important}
 .form-section-title{border-bottom:1px solid var(--g-line) !important;color:var(--g-brand)}
-.alert{border-radius:14px;border:1px solid var(--g-border);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.alert{border-radius:14px;border:1px solid var(--g-border)}
 footer{border-radius:0 !important;border-width:1px 0 0 !important;background:var(--g-glass) !important}
 
 /* Tabel */
