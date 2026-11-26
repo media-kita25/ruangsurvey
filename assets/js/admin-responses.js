@@ -52,34 +52,66 @@
         var el = form.elements[k]; if (!el) return; el.value = (k in o ? o[k] : x[k]) == null ? "" : (k in o ? o[k] : x[k]);
       });
       modal.show();
-    } else if (t.dataset.del) {
+        } else if (t.dataset.del) {
       if (!confirm("Yakin ingin menghapus data ini?")) return;
       var x2 = cache[t.dataset.del];
-      var r = await sb.from("responden").delete().eq("id_responden", x2.id_responden);
-      if (r.error) return R.notice("#pesan", "danger", "Gagal menghapus: " + r.error.message);
-      R.notice("#pesan", "success", "Data berhasil dihapus."); load();
+      
+      // 1. Hapus dulu data jawabannya dari tabel survey_jawaban
+      var deleteJawaban = await sb.from("survey_jawaban").delete().eq("id_jawaban", x2.id_jawaban);
+      
+      if (deleteJawaban.error) {
+          return R.notice("#pesan", "danger", "Gagal menghapus jawaban: " + deleteJawaban.error.message);
+      }
+
+      // 2. Jika id_responden ada, hapus juga data respondennya
+      if (x2.id_responden) {
+          await sb.from("responden").delete().eq("id_responden", x2.id_responden);
+      }
+
+      R.notice("#pesan", "success", "Data berhasil dihapus."); 
+      load();
     }
   });
 
-  form.addEventListener("submit", async function (e) {
+    form.addEventListener("submit", async function (e) {
     e.preventDefault();
     var d = Object.fromEntries(new FormData(form).entries());
-    var a = await sb.from("responden").update({ nama: d.nama.trim() || null, umur: parseInt(d.umur, 10), jenis_kelamin: d.jenis_kelamin, pekerjaan: d.pekerjaan.trim() }).eq("id_responden", editing.id_responden);
-    var b = await sb.from("survey_jawaban").update({ platform_utama: d.platform_utama, durasi_harian: d.durasi_harian, tujuan_utama: d.tujuan_utama, frekuensi: d.frekuensi,
-      bantu_informasi: d.bantu_informasi, ganggu_produktivitas: d.ganggu_produktivitas, pengaruh_kehidupan: d.pengaruh_kehidupan, saran: d.saran.trim() || null }).eq("id_jawaban", editing.id_jawaban);
-    modal.hide();
-    if (a.error || b.error) return R.notice("#pesan", "danger", "Gagal menyimpan: " + ((a.error || b.error).message));
-    R.notice("#pesan", "success", "Data berhasil diperbarui."); load();
-  });
+    var a = { error: null }; 
+    var b = { error: null };
 
-  document.getElementById("btnExport").addEventListener("click", async function () {
-    var r = await sb.from("survey_jawaban").select("*, responden(*)").order("created_at", { ascending: false });
-    if (r.error) return R.notice("#pesan", "danger", "Gagal export: " + r.error.message);
-    var cols = ["nama","umur","jenis_kelamin","pekerjaan","platform_utama","durasi_harian","tujuan_utama","frekuensi","bantu_informasi","ganggu_produktivitas","pengaruh_kehidupan","saran","created_at"];
-    function cell(v) { v = v == null ? "" : String(v); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; }
-    var csv = cols.join(",") + "\n" + r.data.map(function (x) { var o = x.responden || {}; return cols.map(function (c) { return cell(c in o ? o[c] : x[c]); }).join(","); }).join("\n");
-    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }));
-    a.download = "respons-survey.csv"; a.click(); URL.revokeObjectURL(a.href);
+    // 1. Update tabel responden (HANYA jika id_responden ada / tidak null)
+    if (editing.id_responden) {
+      a = await sb.from("responden").update({ 
+          nama: d.nama.trim() || null, 
+          umur: parseInt(d.umur, 10), 
+          jenis_kelamin: d.jenis_kelamin, 
+          pekerjaan: d.pekerjaan.trim() 
+      }).eq("id_responden", editing.id_responden);
+    }
+
+    // 2. Update tabel survey_jawaban
+    b = await sb.from("survey_jawaban").update({ 
+        platform_utama: d.platform_utama, 
+        durasi_harian: d.durasi_harian, 
+        tujuan_utama: d.tujuan_utama, 
+        frekuensi: d.frekuensi,
+        bantu_informasi: d.bantu_informasi, 
+        ganggu_produktivitas: d.ganggu_produktivitas, 
+        pengaruh_kehidupan: d.pengaruh_kehidupan, 
+        saran: d.saran.trim() || null 
+    }).eq("id_jawaban", editing.id_jawaban);
+
+    // Sembunyikan modal
+    modal.hide();
+    
+    // Cek error
+    if (a.error || b.error) {
+        var err = a.error ? a.error.message : b.error.message;
+        return R.notice("#pesan", "danger", "Gagal menyimpan: " + err);
+    }
+    
+    R.notice("#pesan", "success", "Data berhasil diperbarui."); 
+    load();
   });
   load();
 })();

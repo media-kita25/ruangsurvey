@@ -1,29 +1,26 @@
-/* Gaya bersama halaman publik (galeri, kontak, login) */
-body.pub { background:#f5f7f9; padding-top:76px; color:#263238; font-family:Arial,sans-serif; }
-.navbar { background:#fff !important; box-shadow:0 2px 20px rgba(0,0,0,.08); padding:12px 0; }
+/* Tata letak halaman publik (galeri, kontak, login). Warna/kaca diatur oleh style.css (tema glass). */
+body.pub { padding-top:76px; }
+.navbar { padding:12px 0; }
 .navbar-brand { font-size:24px; font-weight:800; color:#087f79 !important; display:flex; align-items:center; }
 .navbar-brand img { height:40px; width:auto; margin-right:10px; }
-.navbar-nav .nav-link { color:#444 !important; font-weight:600; padding:10px 18px !important; border-radius:8px; transition:all .3s; font-size:15px; }
-.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color:#087f79 !important; background:#e6f4f2; }
+.navbar-nav .nav-link { font-weight:600; padding:10px 18px !important; font-size:15px; }
 .navbar-toggler { border:none; padding:8px 10px; } .navbar-toggler:focus { box-shadow:none; }
-.page-shell { max-width:1200px; margin:0 auto; background:#fff; border-left:1px solid #d8dde1; border-right:1px solid #d8dde1; min-height:calc(100vh - 140px); padding-top:0; }
-.pub-header { padding:40px 55px 30px; border-bottom:1px solid #e1e5e8; }
-.pub-header h1 { font-size:32px; font-weight:800; color:#087f79; margin-bottom:8px; }
-.pub-header p { color:#6c757d; font-size:16px; margin:0; }
+.page-shell { max-width:1200px; margin:0 auto; min-height:calc(100vh - 140px); padding-top:0; }
+.pub-header { padding:40px 55px 30px; }
+.pub-header h1 { font-size:32px; font-weight:800; margin-bottom:8px; }
+.pub-header p { color:#506466; font-size:16px; margin:0; }
 .pub-content { padding:30px 55px 55px; }
-.card { border:1px solid #dfe4e7; border-radius:10px; transition:all .3s; overflow:hidden; }
-.card:hover { box-shadow:0 4px 15px rgba(0,0,0,.08); transform:translateY(-3px); }
+.card { overflow:hidden; }
 .card-img-top { height:220px; object-fit:cover; }
-.card-title { font-weight:700; font-size:16px; } .card-text { color:#606970; font-size:14px; line-height:1.6; }
-.card-footer { background:transparent; border-top:1px solid #e1e5e8; padding:12px 20px; color:#6c757d; }
-.form-label { font-weight:600; font-size:14px; color:#444; }
-.form-control { border:1px solid #d8dde1; border-radius:8px; padding:10px 14px; font-size:14px; }
-.form-control:focus { border-color:#087f79; box-shadow:0 0 0 3px rgba(8,127,121,.1); }
+.card-title { font-weight:700; font-size:16px; } .card-text { color:#506466; font-size:14px; line-height:1.6; }
+.card-footer { padding:12px 20px; color:#506466; }
+.form-label { font-weight:600; font-size:14px; color:#2b4647; }
+.form-control { padding:10px 14px; font-size:14px; }
 .btn-primary { padding:10px 30px; font-weight:600; }
 .data-panel { padding:25px; }
-footer { background:#fff; border-top:1px solid #d8dde1; } footer .muted { color:#777; font-size:14px; }
-.auth-page { min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#087f79,#065a56); padding:20px; }
-.auth-box { background:#fff; padding:40px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,.2); max-width:420px; width:100%; }
+footer .muted { color:#506466; font-size:14px; }
+.auth-page { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+.auth-box { padding:40px; max-width:420px; width:100%; }
 @media (max-width:992px){ .navbar-nav{padding-top:10px} .navbar-nav .nav-link{padding:8px 0 !important} }
-@media (max-width:768px){ body.pub{padding-top:66px} .pub-header{padding:25px 20px 20px} .pub-header h1{font-size:26px} .pub-content{padding:20px 20px 40px} .page-shell{border:none} .data-panel{padding:20px} .card-img-top{height:180px} }
+@media (max-width:768px){ body.pub{padding-top:66px} .pub-header{padding:25px 20px 20px} .pub-header h1{font-size:26px} .pub-content{padding:20px 20px 40px} .data-panel{padding:20px} .card-img-top{height:180px} }
 @media (max-width:576px){ body.pub{padding-top:56px} .pub-header{padding:20px 15px 15px} .pub-header h1{font-size:22px} .pub-content{padding:15px 15px 30px} .navbar-brand{font-size:20px} .navbar-brand img{height:32px} .data-panel{padding:15px} }
