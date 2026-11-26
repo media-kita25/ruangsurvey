@@ -1,0 +1,411 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap");
+
+/* ===================== STYLE DASAR ===================== */
+:root {
+  --ms-ink: #17202a;
+  --ms-muted: #667085;
+  --ms-line: #e7ebf2;
+  --ms-soft: #f6f8fb;
+  --ms-brand: #0f766e;
+  --ms-brand-dark: #115e59;
+  --ms-accent: #f59e0b;
+  --ms-danger: #dc3545;
+  --ms-radius: 8px;
+  --ms-shadow: 0 18px 45px rgba(23, 32, 42, .10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--ms-ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  border-bottom: 1px solid rgba(231, 235, 242, .8);
+}
+
+.brand-mark {
+  align-items: center;
+  background: var(--ms-brand);
+  border-radius: 8px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 800;
+  height: 34px;
+  justify-content: center;
+  margin-right: .55rem;
+  width: 34px;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--ms-brand);
+  --bs-btn-border-color: var(--ms-brand);
+  --bs-btn-hover-bg: var(--ms-brand-dark);
+  --bs-btn-hover-border-color: var(--ms-brand-dark);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--ms-brand);
+  --bs-btn-border-color: var(--ms-brand);
+  --bs-btn-hover-bg: var(--ms-brand);
+  --bs-btn-hover-border-color: var(--ms-brand);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 5.75rem);
+  font-weight: 800;
+  line-height: .96;
+  letter-spacing: 0;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, .86);
+  max-width: 660px;
+}
+
+.section-band {
+  padding: 5rem 0;
+}
+
+.section-muted {
+  background: var(--ms-soft);
+}
+
+.stat-tile,
+.feature-tile,
+.auth-panel,
+.data-panel {
+  background: #fff;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-radius);
+  box-shadow: 0 10px 30px rgba(23, 32, 42, .05);
+}
+
+.stat-tile {
+  padding: 1.25rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.muted {
+  color: var(--ms-muted);
+}
+
+.feature-tile {
+  height: 100%;
+  padding: 1.5rem;
+}
+
+.realtime-clock {
+  background: #fff;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-radius);
+  box-shadow: 0 10px 30px rgba(23, 32, 42, .05);
+  min-width: 220px;
+  padding: .8rem 1rem;
+}
+
+.clock-time {
+  color: var(--ms-brand-dark);
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.clock-date {
+  color: var(--ms-muted);
+  font-size: .82rem;
+  margin-top: .2rem;
+}
+
+.feature-icon {
+  align-items: center;
+  background: #ecfdf5;
+  border-radius: 8px;
+  color: var(--ms-brand);
+  display: inline-flex;
+  height: 42px;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 42px;
+}
+
+.page-shell {
+  background: var(--ms-soft);
+  min-height: 100vh;
+  padding-top: 5rem;
+}
+
+.form-section-title {
+  border-bottom: 1px solid var(--ms-line);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 1.25rem;
+  padding-bottom: .75rem;
+}
+
+.required::after {
+  color: var(--ms-danger);
+  content: " *";
+}
+
+/* Hero */
+.hero {
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(rgba(15, 118, 110, 0.75), rgba(15, 118, 110, 0.75)),
+    url("../foto/panduan.jpg") center center / cover no-repeat;
+    
+  color: white;
+}
+
+.panduan-hero {
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(rgba(15, 118, 110, 0.75), rgba(15, 118, 110, 0.75)),
+    url("../foto/panduan.jpg") center center / cover no-repeat;
+    
+  color: white;
+}
+
+.auth-panel {
+  box-shadow: var(--ms-shadow);
+  margin: 0 auto;
+  max-width: 440px;
+  padding: 2rem;
+}
+
+.admin-layout {
+  background: var(--ms-soft);
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  background: #101828;
+  color: #fff;
+  min-height: 100vh;
+  padding: 1.25rem;
+  position: sticky;
+  top: 0;
+}
+
+.admin-sidebar .nav-link {
+  border-radius: 8px;
+  color: rgba(255, 255, 255, .72);
+  font-weight: 600;
+  margin-bottom: .25rem;
+}
+
+.admin-sidebar .nav-link.active,
+.admin-sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, .10);
+  color: #fff;
+}
+
+.admin-content {
+  padding: 1.5rem;
+}
+
+.data-panel {
+  padding: 1.25rem;
+}
+
+.table {
+  vertical-align: middle;
+}
+
+.badge-soft {
+  background: #ecfdf5;
+  color: var(--ms-brand-dark);
+}
+
+.loader {
+  animation: spin .75s linear infinite;
+  border: 3px solid rgba(15, 118, 110, .18);
+  border-radius: 50%;
+  border-top-color: var(--ms-brand);
+  height: 28px;
+  width: 28px;
+}
+
+.empty-state {
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--ms-radius);
+  color: var(--ms-muted);
+  padding: 2rem;
+  text-align: center;
+}
+
+.chart-box {
+  min-height: 330px;
+}
+
+.alert-stack {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  width: min(380px, calc(100vw - 2rem));
+  z-index: 1080;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    min-height: auto;
+    position: static;
+  }
+
+  .admin-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero {
+    min-height: auto;
+    padding: 6rem 0 3rem;
+  }
+
+  .section-band {
+    padding: 3.25rem 0;
+  }
+
+  .auth-panel {
+    padding: 1.25rem;
+  }
+}
+
+/* ---- Tambahan versi statis (Supabase) ---- */
+.brand-img { height: 40px; width: auto; margin-right: .6rem; }
+.admin-sidebar .brand-img { height: 34px; background:#fff; border-radius:8px; padding:3px 6px; }
+body.admin-hidden { visibility: hidden; }
+.img-thumb { max-height: 60px; margin-top: 6px; border-radius: 6px; }
+
+/* ===================== TEMA GLASS ===================== *//* ===== Ruang Survey - tema Glass (dimuat PALING AKHIR, menimpa gaya lama) ===== */
+
+:root{
+  --g-ink:#0f2a2a; --g-muted:#506466; --g-brand:#0f766e; --g-brand2:#14b8a6;
+  --g-glass:rgba(255,255,255,.58); --g-glass-strong:rgba(255,255,255,.78);
+  --g-border:rgba(255,255,255,.75); --g-line:rgba(15,118,110,.14);
+  --g-shadow:0 6px 22px rgba(15,60,60,.10); --g-blur:blur(10px);
+}
+html{scroll-behavior:smooth}
+body,body.pub,body.admin-layout{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif !important; color:var(--g-ink) !important;
+  background:linear-gradient(135deg,#d6f2ec 0%,#e6effb 48%,#e2f6e8 100%) !important;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;transform:translateZ(0);will-change:transform;
+  background:
+   radial-gradient(42vmax 42vmax at 6% 8%,rgba(20,184,166,.38),transparent 60%),
+   radial-gradient(36vmax 36vmax at 94% 16%,rgba(59,130,246,.24),transparent 60%),
+   radial-gradient(46vmax 46vmax at 72% 98%,rgba(132,204,22,.26),transparent 60%);}
+h1,h2,h3,.navbar-brand,.stat-number,.stat-value{font-family:"Plus Jakarta Sans",Inter,sans-serif !important;letter-spacing:-.01em}
+
+/* Permukaan kaca */
+.data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.panduan-card,.card,.sidebar-section,
+.survey-header,.about-header,.vm-header,.pub-header,.auth-box,.modal-content,footer{
+  background:var(--g-glass) !important; border:1px solid var(--g-border) !important;
+  box-shadow:var(--g-shadow) !important;
+}
+.data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.panduan-card,.card{border-radius:20px !important}
+.card:hover,.feature-tile:hover,.product-card:hover,.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,60,60,.16) !important}
+.card,.feature-tile,.product-card,.stat-card,.btn,.nav-link{transition:transform .25s ease,box-shadow .25s ease,background .25s ease !important}
+.card.bg-transparent,.card-footer,.card-header{background:transparent !important}
+.card-footer{border-top:1px solid var(--g-line) !important}
+
+.data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.panduan-card,.card,.sidebar-section,footer{background:rgba(255,255,255,.74) !important}
+.survey-header,.about-header,.vm-header,.pub-header,.auth-box,.modal-content{-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur)}
+
+/* Kerangka halaman */
+.page-shell,.company-wrapper,.company-body,.company-content,.content-section,.section-band,.section-muted,.bg-white:not(.navbar):not(footer){
+  background:transparent !important;
+}
+.page-shell{max-width:1200px;border:0 !important;margin:18px auto 40px !important}
+.survey-header,.about-header,.vm-header,.pub-header{border-radius:24px;margin:0 0 22px;padding:34px 40px !important}
+.survey-content,.about-content,.vm-content,.pub-content{padding-top:6px !important}
+.survey-header h1,.about-header h1,.vm-header h1,.pub-header h1,.content-section h2{
+  background:linear-gradient(90deg,var(--g-brand),#0ea5a0 60%,#65a30d);-webkit-background-clip:text;background-clip:text;color:transparent !important}
+.muted,.text-muted{color:var(--g-muted) !important}
+.content-section{border-color:var(--g-line) !important}
+
+/* Beranda: sidebar + cover */
+.company-sidebar{background:var(--g-glass) !important;-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+  border-right:1px solid var(--g-border) !important;box-shadow:var(--g-shadow)}
+.sidebar-section{border-radius:16px !important;margin:12px;box-shadow:none !important}
+.sidebar-list a{border-radius:10px}.sidebar-list a:hover{background:rgba(20,184,166,.12)}
+.cover{border-radius:26px !important;overflow:hidden;margin:16px !important;box-shadow:var(--g-shadow)}
+.cover-badge,.badge-soft{background:rgba(255,255,255,.22) !important;border:1px solid rgba(255,255,255,.55) !important;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.badge-soft{color:var(--g-brand) !important;background:rgba(20,184,166,.14) !important;border-color:var(--g-line) !important}
+.stat-number,.stat-value{background:linear-gradient(90deg,var(--g-brand),#65a30d);-webkit-background-clip:text;background-clip:text;color:transparent !important}
+.galeri-item{border-radius:20px !important;overflow:hidden;box-shadow:var(--g-shadow)}
+.galeri-overlay{background:linear-gradient(transparent,rgba(8,40,40,.78)) !important}
+.feature-icon,.product-icon{background:linear-gradient(135deg,rgba(20,184,166,.22),rgba(101,163,13,.2)) !important;color:var(--g-brand) !important;border:1px solid var(--g-border);border-radius:14px !important}
+
+/* Navbar kaca melayang (selektor diperkuat agar menang atas gaya inline tiap halaman) */
+body .navbar.fixed-top{background:rgba(255,255,255,.62) !important;-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+  border-bottom:1px solid var(--g-border) !important;box-shadow:0 8px 30px rgba(15,60,60,.08) !important}
+body .navbar .navbar-nav .nav-link{border-radius:999px !important;color:#2b4647 !important;background:transparent}
+body .navbar .navbar-nav .nav-link:hover{background:rgba(20,184,166,.14) !important;color:var(--g-brand) !important}
+body .navbar .navbar-nav .nav-link.active{background:linear-gradient(135deg,var(--g-brand),var(--g-brand2)) !important;color:#fff !important;box-shadow:0 6px 16px rgba(15,118,110,.3)}
+
+/* Tombol & form */
+.btn{border-radius:12px !important;font-weight:600}
+.btn-primary{background:linear-gradient(135deg,var(--g-brand),var(--g-brand2)) !important;border:0 !important;color:#fff !important;box-shadow:0 8px 20px rgba(15,118,110,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,118,110,.36)}
+.btn-outline-primary{background:rgba(255,255,255,.4);border-color:var(--g-brand) !important;color:var(--g-brand) !important}
+.btn-outline-primary:hover{background:var(--g-brand) !important;color:#fff !important}
+.btn-light{background:rgba(255,255,255,.85) !important;border:1px solid var(--g-border) !important}
+.form-control,.form-select{background:rgba(255,255,255,.72) !important;border:1px solid var(--g-line) !important;border-radius:12px !important;color:var(--g-ink)}
+.form-control:focus,.form-select:focus{border-color:var(--g-brand2) !important;box-shadow:0 0 0 4px rgba(20,184,166,.18) !important;background:#fff !important}
+.form-section-title{border-bottom:1px solid var(--g-line) !important;color:var(--g-brand)}
+.alert{border-radius:14px;border:1px solid var(--g-border)}
+footer{border-radius:0 !important;border-width:1px 0 0 !important;background:var(--g-glass) !important}
+
+/* Tabel */
+.table{--bs-table-bg:transparent;--bs-table-hover-bg:rgba(20,184,166,.08)}
+.table>:not(caption)>*>*{border-color:var(--g-line)}
+.table thead th{color:var(--g-brand);font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.table-warning{--bs-table-bg:rgba(250,204,21,.18)}
+
+/* Login */
+.auth-page{background:linear-gradient(135deg,#0f766e,#0b4f58 60%,#14532d) !important}
+.auth-page::before{background:radial-gradient(40vmax 40vmax at 15% 15%,rgba(94,234,212,.35),transparent 60%),radial-gradient(40vmax 40vmax at 90% 90%,rgba(163,230,53,.28),transparent 60%)}
+.auth-box{border-radius:26px !important;background:rgba(255,255,255,.78) !important}
+
+/* Admin */
+.admin-sidebar{background:rgba(12,32,36,.82) !important;-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);border-right:1px solid rgba(255,255,255,.1)}
+.admin-sidebar .nav-link{border-radius:12px !important}
+.admin-sidebar .nav-link.active{background:linear-gradient(135deg,var(--g-brand),var(--g-brand2)) !important;color:#fff !important}
+.admin-content h1{font-weight:800}
+
+/* Animasi muncul (diatur ui.js) */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}.reveal{opacity:1;transform:none}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .data-panel,.feature-tile,.stat-tile,.stat-card,.product-card,.card,.navbar,.company-sidebar,.auth-box,footer{background:rgba(255,255,255,.94) !important}}
+@media (max-width:768px){.survey-header,.about-header,.vm-header,.pub-header{padding:22px 20px !important;border-radius:20px}.page-shell{margin:10px auto 30px !important}}
